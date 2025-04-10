@@ -1008,7 +1008,7 @@ z-index: 2;
 /* ============= ONLY CENTER SECTION ================= */
 
 /* =================== SECOND SECTION (CONVENIENCE SCREEN) STYLES ============= */
-.convenience-section-container {
+.only-center-container {
   background-color: #242424;
   min-height: 100vh;
   width: 100%;
@@ -1020,19 +1020,22 @@ z-index: 2;
   gap: 40px;
 }
 
-.convenience-header {
+.only-center-header {
   margin-bottom: 60px;
 }
 
-.convenience-header h2 {
+.only-center-header h2 {
   margin-bottom: 8px;
   font-weight: 700;
   font-size: 40px;
   line-height: 64px;
-  letter-spacing: -1.4%;
+  letter-spacing: -1.4%;  
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-.convenience-header h3 {
+.only-center-header h3 {
   font-size: 30px;
   font-weight: 800;
   line-height: 64px;
