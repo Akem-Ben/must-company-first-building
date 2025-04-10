@@ -1460,7 +1460,7 @@ body {
 }
 
 /* Dark overlay for better text visibility */
-.hero-overlay {
+.mirae-section-overlay {
   position: absolute;
   top: 0;
   left: 0;
