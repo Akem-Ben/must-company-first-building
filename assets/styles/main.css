@@ -341,10 +341,6 @@ z-index: 2;
   gap: 40px;
 }
 
-.convenience-header {
-  margin-bottom: 60px;
-}
-
 .convenience-header h2 {
   margin-bottom: 8px;
   font-weight: 700;
@@ -1003,5 +999,304 @@ z-index: 2;
   
   .view-more-btn img {
     width: 10px;
+  }
+}
+
+
+
+
+/* ============= ONLY CENTER SECTION ================= */
+
+/* =================== SECOND SECTION (CONVENIENCE SCREEN) STYLES ============= */
+.convenience-section-container {
+  background-color: #242424;
+  min-height: 100vh;
+  width: 100%;
+  padding: 160px 192px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  color: white;
+  gap: 40px;
+}
+
+.convenience-header {
+  margin-bottom: 60px;
+}
+
+.convenience-header h2 {
+  margin-bottom: 8px;
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 64px;
+  letter-spacing: -1.4%;
+}
+
+.convenience-header h3 {
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 64px;
+  letter-spacing: -1%;
+}
+
+.convenience-main {
+  display: flex;
+  gap: 50px;
+  width: 100%;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.convenience-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 200px;
+  max-width: 30%;
+  flex: 1 1 calc(33.333% - 50px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+}
+
+.convenience-card:hover {
+  transform: translateY(-5px);
+  cursor: pointer;
+}
+
+.convenience-card .image-container {
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 40px;
+  flex-shrink: 0;
+  width: 100%;
+  height: auto;
+}
+
+.convenience-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.convenience-text {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.convenience-card h2 {
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 1.2;
+  letter-spacing: -0.014em;
+  margin-bottom: 16px;
+}
+
+.convenience-card p {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.6;
+  letter-spacing: -0.01em;
+  color: #7d7d7d;
+}
+
+.convenience-card-progress {
+  width: 100%;
+  height: 2px;
+  background-color: #7d7d7d;
+  margin-top: 30px;
+}
+
+/* ===================== CONVENIENCE SCREEN RESPONSIVE STYLES ================ */
+
+@media (max-width: 1024px) and (min-width: 768px) {
+  .convenience-section-container {
+    padding: 100px 40px;
+  }
+  
+  .convenience-card {
+    flex: 1 1 calc(50% - 25px);
+    max-width: calc(50% - 25px);
+    margin-bottom: 50px;
+  }
+  
+  .convenience-card .image-container {
+    height: auto;
+    margin-bottom: 30px;
+  }
+  
+  .convenience-text {
+    min-height: 220px;
+  }
+  
+  .convenience-card[style*="padding-top: 120px"] {
+    padding-top: 60px !important;
+  }
+  
+  .convenience-card[style*="padding-top: 60px"] {
+    padding-top: 30px !important;
+  }
+}
+
+@media (max-width: 1200px) {
+  .convenience-section-container {
+    padding: 100px 6%;
+  }
+
+  .convenience-card {
+    flex: 1 1 calc(50% - 30px);
+  }
+  
+  .convenience-card .image-container {
+    margin-bottom: 80px;
+    height: auto;
+  }
+
+  .convenience-header h2 {
+    font-size: 36px;
+    line-height: 56px;
+  }
+
+  .convenience-header h3 {
+    font-size: 26px;
+    line-height: 48px;
+  }
+}
+
+@media (max-width: 992px) {
+  .convenience-section-container {
+    padding: 80px 5%;
+  }
+
+  .convenience-card {
+    min-width: 240px;
+  }
+
+  .convenience-card h2 {
+    font-size: 24px;
+  }
+  
+  .convenience-card .image-container {
+    height: auto;
+    margin-bottom: 60px;
+  }
+}
+
+@media (max-width: 768px) {
+  .convenience-section-container {
+    padding: 60px 20px;
+    gap: 20px;
+  }
+
+  .convenience-header {
+    margin-bottom: 40px;
+  }
+
+  .convenience-header h2 {
+    font-size: 32px;
+    line-height: 48px;
+  }
+
+  .convenience-header h3 {
+    font-size: 22px;
+    line-height: 36px;
+  }
+
+  .convenience-main {
+    flex-direction: column;
+    gap: 60px;
+  }
+
+  .convenience-card {
+    max-width: 100%;
+    width: 100%;
+    padding-top: 0 !important;
+  }
+  
+  .convenience-card .image-container {
+    margin-bottom: 40px;
+    height: auto;
+  }
+  
+  .convenience-card-progress {
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  .convenience-section-container {
+    padding: 40px 16px;
+    min-height: auto;
+  }
+
+  .convenience-header {
+    margin-bottom: 30px;
+  }
+
+  .convenience-header h2 {
+    font-size: 28px;
+    line-height: 40px;
+  }
+
+  .convenience-header h3 {
+    font-size: 20px;
+    line-height: 32px;
+  }
+  
+  .convenience-main {
+    gap: 50px;
+  }
+
+  .convenience-card h2 {
+    font-size: 22px;
+  }
+
+  .convenience-card p {
+    font-size: 14px;
+  }
+  
+  .convenience-card .image-container {
+    height: auto;
+    margin-bottom: 30px;
+  }
+}
+
+@media (max-width: 375px) {
+  .convenience-section-container {
+    padding: 30px 12px;
+  }
+  
+  .convenience-header h2 {
+    font-size: 24px;
+    line-height: 32px;
+  }
+  
+  .convenience-header h3 {
+    font-size: 18px;
+    line-height: 28px;
+  }
+  
+  .convenience-card .image-container {
+    height: auto;
+    margin-bottom: 20px;
+  }
+  
+  .convenience-card h2 {
+    font-size: 18px;
+    margin-bottom: 12px;
+  }
+  
+  .convenience-card p {
+    font-size: 12px;
+  }
+  
+  .convenience-main {
+    gap: 40px;
+  }
+  
+  .convenience-card-progress {
+    margin-top: 10px;
+    margin-bottom: 20px;
   }
 }
