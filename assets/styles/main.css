@@ -1300,3 +1300,159 @@ z-index: 2;
     gap: 40px;
   }
 }
+
+
+
+
+
+
+
+/* ======================== AVENUE SECTION STYLES ======================= */
+
+.avenue-section-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  color: white;
+  gap: 40px;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 60px 0;
+  background-color: #242424;
+  overflow: hidden;
+}
+
+.avenue-section-container .avenue-header {
+  margin-bottom: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+      padding: 20px;
+}
+
+.avenue-section-container .avenue-header .avenue-header-text {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 15px;
+  width: 100%;
+  flex-wrap: nowrap;
+  justify-content: center;
+  text-align: center;
+}
+.avenue-section-container .avenue-header .avenue-header-text h1 {
+  font-size: 2rem;
+  white-space: nowrap;
+}
+
+.avenue-container {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto; /* Center the container */
+  max-width: 100vw;
+}
+
+.avenue-track {
+  display: flex;
+  position: absolute;
+  left: 0;
+  transition: transform 0.5s ease;
+  overflow: hidden;
+}
+
+.avenue-item {
+  flex-shrink: 0;
+  width: 320px;
+  height: 400px;
+  margin: 40px 20px;
+  border-radius: 5px;
+  overflow: hidden;
+  transition: all 0.5s ease;
+  transform-style: preserve-3d;
+  filter: brightness(0.7);
+}
+
+.avenue-item.center {
+  transform: scale(1.3);
+  filter: brightness(1);
+  z-index: 10;
+  margin-top: 20px;
+  height: 400px;
+  width: 350px;
+}
+
+
+.avenue-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* ============ AVENUE SECTION RESPONSIVE STYLING ============= */
+@media (max-width: 768px) {
+  .avenue-container {
+      height: 250px;
+  }
+  
+  .avenue-item {
+      width: 160px;
+      height: 160px;
+      margin: 40px 10px;
+  }
+  
+  .avenue-item.center {
+      height: 200px;
+      width: 200px;
+  }
+
+  .avenue-section-container .avenue-header {
+    margin-bottom: 40px;
+  }
+
+  .avenue-section-container .avenue-header .avenue-header-text {
+    gap: 8px;
+  }
+
+  .avenue-section-container .avenue-header .avenue-header-text h1 {
+    font-size: 1.5rem;
+  }
+
+}
+
+@media (max-width: 480px) {
+  .avenue-container {
+      height: 200px;
+  }
+  
+  .avenue-item {
+      width: 120px;
+      height: 120px;
+      margin: 40px 8px;
+  }
+  
+  .avenue-item.center {
+      height: 160px;
+      width: 160px;
+  }
+
+  .avenue-section-container .avenue-header {
+    margin-bottom: 30px;
+    padding: 15px;
+  }
+
+  .avenue-section-container .avenue-header .avenue-header-text {
+    gap: 5px;
+  }
+
+  .avenue-section-container .avenue-header .avenue-header-text h1 {
+    font-size: 1.2rem;
+  }
+}
