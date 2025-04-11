@@ -122,14 +122,15 @@ document.addEventListener('DOMContentLoaded', function() {
   let currentPosition = 0;
   let animationId;
   let isScrolling = true;
-  const itemWidth = items[0].offsetWidth + 
-                   parseInt(getComputedStyle(items[0]).marginLeft) + 
-                   parseInt(getComputedStyle(items[0]).marginRight);
-  const centerOffset = container.offsetWidth / 2;
+  const scrollSpeed = 1; // Adjust speed as needed
+  let itemWidth = items[0].offsetWidth + 
+                 parseInt(getComputedStyle(items[0]).marginLeft) + 
+                 parseInt(getComputedStyle(items[0]).marginRight);
+  let centerOffset = container.offsetWidth / 2;
   
   // Clone items for seamless looping
   function cloneItems() {
-    const itemsToClone = Array.from(items).slice(0, items.length / 2);
+    const itemsToClone = Array.from(items).slice(0, Math.ceil(items.length / 2));
     itemsToClone.forEach(item => {
       const clone = item.cloneNode(true);
       track.appendChild(clone);
@@ -140,6 +141,12 @@ document.addEventListener('DOMContentLoaded', function() {
   function initializeAvenue() {
     // Clear any existing animation
     cancelAnimationFrame(animationId);
+    
+    // Recalculate dimensions
+    itemWidth = items[0].offsetWidth + 
+               parseInt(getComputedStyle(items[0]).marginLeft) + 
+               parseInt(getComputedStyle(items[0]).marginRight);
+    centerOffset = container.offsetWidth / 2;
     
     // Reset track position
     currentPosition = 0;
@@ -183,12 +190,17 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Smooth scrolling function
   function scrollAvenue() {
-    currentPosition -= 1;
+    currentPosition -= scrollSpeed;
     track.style.transform = `translateX(${currentPosition}px)`;
     updateCenterItem();
     
     // Check if we need to loop back
-    const totalWidth = itemWidth * (items.length / 2);
+    const firstItem = items[0];
+    const firstItemWidth = firstItem.offsetWidth + 
+                          parseInt(getComputedStyle(firstItem).marginLeft) + 
+                          parseInt(getComputedStyle(firstItem).marginRight);
+    const totalWidth = firstItemWidth * items.length;
+    
     if (Math.abs(currentPosition) >= totalWidth) {
       // Jump back to the start position without animation
       track.style.transition = 'none';
@@ -197,9 +209,6 @@ document.addEventListener('DOMContentLoaded', function() {
       
       // Force reflow
       void track.offsetWidth;
-      
-      // Re-enable transitions
-      track.style.transition = 'transform 0.5s ease';
     }
     
     animationId = requestAnimationFrame(scrollAvenue);
@@ -219,12 +228,18 @@ document.addEventListener('DOMContentLoaded', function() {
   cloneItems();
   initializeAvenue();
   
-  // Handle window resize
+  // Handle window resize with debounce
+  let resizeTimeout;
   window.addEventListener('resize', function() {
-    initializeAvenue();
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(initializeAvenue, 100);
   });
   
   // Pause on hover for better UX
   container.addEventListener('mouseenter', stopScrolling);
   container.addEventListener('mouseleave', startScrolling);
+  
+  // Touch events for mobile
+  container.addEventListener('touchstart', stopScrolling);
+  container.addEventListener('touchend', startScrolling);
 });
