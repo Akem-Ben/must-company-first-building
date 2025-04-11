@@ -95,7 +95,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 //============================= SCROLL TO TOP FUNCTIONALITY ======================== //
-// const scrollToTopBtn = document.querySelector(".scroll-to-top");
+// const scrollToTopBtn = document.querySelector("#scroll-to-top");
 // const scrollToTop = () => {
 //   window.scrollTo({
 //     top: 0,
@@ -113,6 +113,63 @@ document.addEventListener("DOMContentLoaded", function () {
 // });
 
 
+//============================= CHRISTMAS ADVERT SECTION FUNCTIONALITIES ======================== //
+document.addEventListener('DOMContentLoaded', function() {
+  // Carousel functionality
+  const cards = document.querySelectorAll('.advert-card');
+  const prevButtons = document.querySelectorAll('.prev-btn');
+  const nextButtons = document.querySelectorAll('.next-btn');
+  
+  // Set initial active card to the first one
+  let currentCardIndex = 0;
+  
+  // Add event listeners to all previous buttons
+  prevButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      // Hide current card
+      cards[currentCardIndex].classList.remove('active');
+      
+      // Calculate the previous card index (with wrapping)
+      currentCardIndex = (currentCardIndex - 1 + cards.length) % cards.length;
+      
+      // Show the previous card
+      cards[currentCardIndex].classList.add('active');
+    });
+  });
+  
+  // Add event listeners to all next buttons
+  nextButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      // Hide current card
+      cards[currentCardIndex].classList.remove('active');
+      
+      // Calculate the next card index (with wrapping)
+      currentCardIndex = (currentCardIndex + 1) % cards.length;
+      
+      // Show the next card
+      cards[currentCardIndex].classList.add('active');
+    });
+  });
+  
+  // Updated scroll to top functionality - now scrolls to the top of the container
+  const scrollToTopButton = document.getElementById('scroll-to-top');
+  if (scrollToTopButton) {
+    scrollToTopButton.addEventListener('click', function() {
+      // Get the container element
+      const container = document.querySelector('.hero-section-container');
+      if (container) {
+        // Scroll the container into view
+        container.scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    });
+  }
+});
+
+
+
 // =============================AVENUE SECTION FUNCTIONALITIES ======================== //
 document.addEventListener('DOMContentLoaded', function() {
   const track = document.querySelector('.avenue-track');
@@ -122,15 +179,14 @@ document.addEventListener('DOMContentLoaded', function() {
   let currentPosition = 0;
   let animationId;
   let isScrolling = true;
-  const scrollSpeed = 1; // Adjust speed as needed
-  let itemWidth = items[0].offsetWidth + 
-                 parseInt(getComputedStyle(items[0]).marginLeft) + 
-                 parseInt(getComputedStyle(items[0]).marginRight);
-  let centerOffset = container.offsetWidth / 2;
+  const itemWidth = items[0].offsetWidth + 
+                   parseInt(getComputedStyle(items[0]).marginLeft) + 
+                   parseInt(getComputedStyle(items[0]).marginRight);
+  const centerOffset = container.offsetWidth / 2;
   
   // Clone items for seamless looping
   function cloneItems() {
-    const itemsToClone = Array.from(items).slice(0, Math.ceil(items.length / 2));
+    const itemsToClone = Array.from(items).slice(0, items.length / 2);
     itemsToClone.forEach(item => {
       const clone = item.cloneNode(true);
       track.appendChild(clone);
@@ -141,12 +197,6 @@ document.addEventListener('DOMContentLoaded', function() {
   function initializeAvenue() {
     // Clear any existing animation
     cancelAnimationFrame(animationId);
-    
-    // Recalculate dimensions
-    itemWidth = items[0].offsetWidth + 
-               parseInt(getComputedStyle(items[0]).marginLeft) + 
-               parseInt(getComputedStyle(items[0]).marginRight);
-    centerOffset = container.offsetWidth / 2;
     
     // Reset track position
     currentPosition = 0;
@@ -190,17 +240,12 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Smooth scrolling function
   function scrollAvenue() {
-    currentPosition -= scrollSpeed;
+    currentPosition -= 1;
     track.style.transform = `translateX(${currentPosition}px)`;
     updateCenterItem();
     
     // Check if we need to loop back
-    const firstItem = items[0];
-    const firstItemWidth = firstItem.offsetWidth + 
-                          parseInt(getComputedStyle(firstItem).marginLeft) + 
-                          parseInt(getComputedStyle(firstItem).marginRight);
-    const totalWidth = firstItemWidth * items.length;
-    
+    const totalWidth = itemWidth * (items.length / 2);
     if (Math.abs(currentPosition) >= totalWidth) {
       // Jump back to the start position without animation
       track.style.transition = 'none';
@@ -209,6 +254,9 @@ document.addEventListener('DOMContentLoaded', function() {
       
       // Force reflow
       void track.offsetWidth;
+      
+      // Re-enable transitions
+      track.style.transition = 'transform 0.5s ease';
     }
     
     animationId = requestAnimationFrame(scrollAvenue);
@@ -228,18 +276,12 @@ document.addEventListener('DOMContentLoaded', function() {
   cloneItems();
   initializeAvenue();
   
-  // Handle window resize with debounce
-  let resizeTimeout;
+  // Handle window resize
   window.addEventListener('resize', function() {
-    clearTimeout(resizeTimeout);
-    resizeTimeout = setTimeout(initializeAvenue, 100);
+    initializeAvenue();
   });
   
   // Pause on hover for better UX
   container.addEventListener('mouseenter', stopScrolling);
   container.addEventListener('mouseleave', startScrolling);
-  
-  // Touch events for mobile
-  container.addEventListener('touchstart', stopScrolling);
-  container.addEventListener('touchend', startScrolling);
 });
