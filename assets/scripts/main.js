@@ -1,5 +1,4 @@
 //============================= NAVBAR HAMBURGER FUNCTIONALITIES ======================== //
-// Mobile menu functionality
 const mobileMenuBtn = document.querySelector(".mobile-menu-btn");
 const mobileNav = document.querySelector(".mobile-nav");
 const overlay = document.querySelector(".overlay");
@@ -20,7 +19,6 @@ overlay.addEventListener("click", function () {
   document.body.style.overflow = "auto";
 });
 
-// Close mobile menu when resizing to desktop size
 window.addEventListener("resize", function () {
   if (window.innerWidth > 768 && mobileNav.classList.contains("active")) {
     mobileMenuBtn.classList.remove("active");
@@ -164,12 +162,14 @@ document.addEventListener('DOMContentLoaded', function() {
   // Set initial position (starting from the middle of the first set)
   track.style.transform = 'translateX(0)';
   
+  let animation = null;
+  
   // Animation function
   function startAnimation() {
     const totalScrollWidth = (itemWidth * (totalItems / 2)); // Scroll only through half (original set)
     
     // Create keyframes for the animation
-    track.animate([
+    animation = track.animate([
       { transform: 'translateX(0)' },
       { transform: `translateX(-${totalScrollWidth}px)` }
     ], {
@@ -202,6 +202,19 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   }
+  
+  // Event listeners for mouse enter and leave
+  container.addEventListener('mouseenter', function() {
+    if (animation) {
+      animation.pause();
+    }
+  });
+  
+  container.addEventListener('mouseleave', function() {
+    if (animation) {
+      animation.play();
+    }
+  });
   
   // Start the animation
   startAnimation();
